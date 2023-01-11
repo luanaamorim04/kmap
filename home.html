@@ -156,8 +156,11 @@ button:hover {
       </div>
       </div>
       <div display="none" onmouseover="build('problema')">
-        <h2 >Problemas</h2>
-        <div class="aluno" id="problema" display="none">
+        <h2>Problemas</h2>
+        <div id="problems"></div>
+        <input id="title" placeholder="Título" />
+        <input id="description" placeholder="Descrição"/>
+        <button id="add">Adicionar problema</button>
       </div>
       </div>
       <div display="none" onmouseover="build('mapa')">
@@ -174,6 +177,39 @@ button:hover {
     </div>
   </form>
 </div>
+<script>
+  // Get the modal
+var modal = document.getElementById('id01');
 
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+if (!localStorage.getItem("problems")) {
+    localStorage.setItem("problems", JSON.stringify([]))
+  }
+
+  const problems = document.getElementById("problems")
+  JSON.parse(localStorage.getItem("problems") ?? "[]").forEach(drawProblem);
+
+  document.getElementById("add").addEventListener("click", (e) => {
+    e.preventDefault()
+    e.stopImmediatePropagation()
+    const problem = {
+      title: document.getElementById("title").value,
+      description: document.getElementById("description").value,
+    }
+    localStorage.setItem("problems", JSON.stringify([...JSON.parse(localStorage.getItem("problems")), problem]))
+    drawProblem(problem)
+
+  })
+
+  function drawProblem(problem) {
+    problems.innerHTML += `<h3>${problem.title}</h3><h4>${problem.description}</h4>`
+  }
+</script>
 </body>
 </html>
