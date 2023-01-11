@@ -15,6 +15,10 @@ body {font-family: Arial, Helvetica, sans-serif;}
   width:  100px;
 }
 
+h3:hover
+{
+  color: green;
+}
 hr 
 {
   color: green;
@@ -111,19 +115,20 @@ button:hover {
   
   function build(id)
   {
+    document.getElementById("aluno").innerHTML = "";
+    document.getElementById("problema").innerHTML = "";
+    document.getElementById("mapa").innerHTML = "";
     for (var i = 0; i < alunos.length; i++)
     {
 
       var t = document.createElement("h3");
       t.innerHTML = alunos[i];
-      document.getElementById(id).innerHTML
-
-
-
-      // innerHTML += "<h3>";
-      // document.getElementById(id).innerHTML += alunos[i];
-      // document.getElementById(id).innerHTML += "</h3>";
+      document.getElementById(id).appendChild(t);
     }
+
+    var t = document.createElement("input");
+    t.style = "padding: 12px 20px; display: inline-block; border: 2px solid green;";
+    document.getElementById(id).appendChild(t);
   }
 
   function hide(id)
@@ -145,17 +150,17 @@ button:hover {
     <div class="container" style="height: 660px">
       <h1>Olimpo</h1>
       <hr>
-      <div display="none" onmouseover="build('aluno')" onmouseout="hide('aluno')">
-        <h2 >Alunos</h2>
+      <div display="none">
+        <h2 onmouseover="build('aluno')" >Alunos</h2>
         <div class="aluno" id="aluno" display="none">
       </div>
       </div>
-      <div display="none" onmouseover="build('problema')" onmouseout="hide('problema')">
+      <div display="none" onmouseover="build('problema')">
         <h2 >Problemas</h2>
         <div class="aluno" id="problema" display="none">
       </div>
       </div>
-      <div display="none" onmouseover="build('mapa')" onmouseout="hide('mapa')">
+      <div display="none" onmouseover="build('mapa')">
         <h2 >Mapas</h2>
         <div class="aluno" id="mapa" display="none">
       </div>
