@@ -101,7 +101,6 @@ button:hover {
   border: 1px solid #888;
   width: 100%; /* Could be more or less, depending on screen size */
 }
-}
 </style>
 
 <script type="text/javascript">
@@ -137,16 +136,43 @@ button:hover {
       </div>
       </div>
       <h2>Problemas</h2>
+      <div id="problems"></div>
+      <input id="title" placeholder="Título" />
+      <input id="description" placeholder="Descrição"/>
+      <button id="add">Adicionar problema</button>
       <h2>Apostilas</h2>
     </div>
-
-
 
     <div class="container" style="background-color:#f1f1f1">
         
     </div>
   </form>
 </div>
+
+<script>
+  if (!localStorage.getItem("problems")) {
+    localStorage.setItem("problems", JSON.stringify([]))
+  }
+
+  const problems = document.getElementById("problems")
+  JSON.parse(localStorage.getItem("problems") ?? "[]").forEach(drawProblem);
+
+  document.getElementById("add").addEventListener("click", (e) => {
+    e.preventDefault()
+    e.stopImmediatePropagation()
+    const problem = {
+      title: document.getElementById("title").value,
+      description: document.getElementById("description").value,
+    }
+    localStorage.setItem("problems", JSON.stringify([...JSON.parse(localStorage.getItem("problems")), problem]))
+    drawProblem(problem)
+
+  })
+
+  function drawProblem(problem) {
+    problems.innerHTML += `<h3>${problem.title}</h3><h4>${problem.description}</h4>`
+  }
+</script>
 
 </body>
 </html>
