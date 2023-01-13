@@ -1,9 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+
+</style>
+
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
+
+.rating {
+  display: inline-block;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  font-size: 50px;
+}
+
+.rating label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
+.rating label:last-child {
+  position: static;
+}
+
+.rating label:nth-child(1) {
+  z-index: 5;
+}
+
+.rating label:nth-child(2) {
+  z-index: 4;
+}
+
+.rating label:nth-child(3) {
+  z-index: 3;
+}
+
+.rating label:nth-child(4) {
+  z-index: 2;
+}
+
+.rating label:nth-child(5) {
+  z-index: 1;
+}
+
+.rating label input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.rating label .icon {
+  float: left;
+  color: transparent;
+}
+
+.rating label:last-child .icon {
+  color: #000;
+}
+
+.rating:not(:hover) label input:checked ~ .icon,
+.rating:hover label:hover input ~ .icon {
+  color: #09f;
+}
+
+.rating label input:focus:not(:checked) ~ .icon:last-child {
+  color: #000;
+  text-shadow: 0 0 5px #09f;
+}
 
 .aluno
 {
@@ -19,12 +92,12 @@ h3:hover
 {
   color: green;
 }
-hr
+hr 
 {
   color: green;
 }
 
-h2
+h2, p
 {
   color: gray;
   margin-left: 5%;
@@ -59,7 +132,7 @@ input[type=text], input[type=password] {
 }
 
 /* Set a style for all buttons */
-.button {
+button {
   background-color: #04AA6D;
   color: white;
   padding: 14px 20px;
@@ -69,7 +142,7 @@ input[type=text], input[type=password] {
   width: 100%;
 }
 
-.button:hover {
+button:hover {
   opacity: 0.8;
 }
 
@@ -92,7 +165,7 @@ input[type=text], input[type=password] {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0);
+  background-color: rgb(0,0,0);  
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity
   /*padding-top: 60px;*/
 }
@@ -106,13 +179,14 @@ input[type=text], input[type=password] {
   width: 100%; /* Could be more or less, depending on screen size */
 
 }
+}
 </style>
 
+
 <script type="text/javascript">
-
-  const alunos = ["Luana", "Ruy", "Tiago", "Nicolas"];
+  const alunos = ["Luana", "Ruy", "Tiago", "Nikolaz"];
   const mapa = ["Informatica", "Matematica", "Fisica", "Historia"];
-
+  
   function buildAluno(id)
   {
     document.getElementById("aluno").innerHTML = "";
@@ -131,7 +205,6 @@ input[type=text], input[type=password] {
     t.placeholder = "nome";
     document.getElementById(id).appendChild(t);
     t = document.createElement("button");
-    t.className = "button"
     t.style = "font-size: 12px; display: inline-block; border: 1px solid green;";
     t.innerHTML = "adicionar";
     document.getElementById(id).appendChild(t);
@@ -145,20 +218,18 @@ input[type=text], input[type=password] {
     for (var i = 0; i < mapa.length; i++)
     {
 
-      var t = document.createElement("button");
+      var t = document.createElement("h3");
       t.innerHTML = mapa[i];
-      t.style.color = "black"
-      t.style.textDecoration = "none"
-      t.style.display = "block"
-      t.style.borderWidth = "0"
-      t.style.backgroundColor = "white"
-      t.style.cursor = "pointer"
-      t.addEventListener("click", (e) => {
-        e.preventDefault()
-        e.stopImmediatePropagation()
-        window.open("grafo.html", "_self")
-      })
       document.getElementById(id).appendChild(t);
+    }
+  }
+
+  function buildRate(idx)
+  {
+    alert(idx);
+    for (var i = 1; i <= idx; i++)
+    {
+      document.getElementById(i).style = "color: green";
     }
   }
 
@@ -167,6 +238,8 @@ input[type=text], input[type=password] {
     document.getElementById("aluno").innerHTML = "";
     document.getElementById("problema").innerHTML = "";
     document.getElementById("mapa").innerHTML = "";
+
+
     var t = document.createElement("input");
     t.style = "font-size: 12px; display: inline-block; border: 1px solid green;";
     t.placeholder = "titulo";
@@ -179,16 +252,19 @@ input[type=text], input[type=password] {
     t.style = "font-size: 12px; display: inline-block; border: 1px solid green;";
     t.placeholder = "tags";
     document.getElementById(id).appendChild(t);
+
+    var f = `<span id = "1" onclick = alert(1) class="fa fa-star"></span>
+    <span id = "2" onclick = "buildRate(2)" class="fa fa-star"></span>
+    <span id = "3" onclick = "buildRate(3)" class="fa fa-star"></span>
+    <span id = "4" onclick = "buildRate(4)" class="fa fa-star"></span>
+    <span id = "5" onclick = "buildRate(5)" class="fa fa-star"></span>`;
+
+    document.getElementById(id).innerHTML += f;
+
     t = document.createElement("button");
-    t.className = "button"
     t.style = "font-size: 12px; display: inline-block; border: 1px solid green;";
     t.innerHTML = "adicionar";
     document.getElementById(id).appendChild(t);
-  }
-
-  function hide(id)
-  {
-    document.getElementById(id).innerHTML = "";
   }
 
 </script>
@@ -200,20 +276,20 @@ input[type=text], input[type=password] {
 <body>
 
 <div id="id01" class="modal">
-
+  
   <form class="modal-content animate" action="/action_page.php" method="post">
     <div class="container" style="height: 660px">
       <h1>Olimpo</h1>
       <hr>
-      <div display="none">
+      <div>
         <h2 onmouseover="buildAluno('aluno')" >Alunos</h2>
-        <div class="aluno" id="aluno" display="none">
+        <div class="aluno" id="aluno">
       </div>
       </div>
-      <div display="none" onmouseover="buildProblema('problema')">
+      <div onmouseover="buildProblema('problema')">
         <h2 >Problemas</h2>
 
-        <div class="aluno" id="problema" display="none">
+        <div class="aluno" id="problema">
       </div>
       </div>
       <div onmouseover="buildMapa('mapa')">
@@ -221,12 +297,14 @@ input[type=text], input[type=password] {
         <div class="aluno" id="mapa">
       </div>
       </div>
+
+
     </div>
 
 
 
     <div class="container" style="background-color:#f1f1f1">
-
+        
     </div>
   </form>
 </div>
