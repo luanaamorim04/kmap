@@ -204,7 +204,11 @@ button:hover {
     t = document.createElement("button");
     t.style = "font-size: 12px; display: inline-block; border: 1px solid green;";
     t.innerHTML = "adicionar";
-    t.onclick = "addName()";
+    t.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      addName();
+    });
     document.getElementById(id).appendChild(t);
   }
 
