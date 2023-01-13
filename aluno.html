@@ -110,11 +110,21 @@ button:hover {
 
   function build(id)
   {
+    document.getElementById(id).innerHTML = ""
     for (var i = 0; i < alunos.length; i++)
     {
-    document.getElementById(id).innerHTML += "<h3>";
-    document.getElementById(id).innerHTML += alunos[i];
-    document.getElementById(id).innerHTML += "</h3>";
+      const text = alunos[i]
+
+      const t = document.createElement("h3");
+      t.innerText = text;
+      t.style.cursor = "pointer"
+      t.addEventListener("click", (e) => {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        localStorage.setItem("problem_type", text)
+        window.open("pproblemas.html", "_self")
+      })
+      document.getElementById(id).appendChild(t)
     }
   }
 
