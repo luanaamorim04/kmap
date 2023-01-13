@@ -3,12 +3,9 @@
 <head>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-
-</style>
-
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
 
@@ -180,42 +177,34 @@ button:hover {
 
 }
 }
-</style>
 
+</style>
 
 <script type="text/javascript">
   const alunos = ["Luana", "Ruy", "Tiago", "Nikolaz"];
   const mapa = ["Informatica", "Matematica", "Fisica", "Historia"];
+
+  function addName()
+  {
+    var t = document.getElementById("nomein").value;
+    alert(1);
+    document.getElementById("nomes").innerHTML += t;
+  }
 
   function buildAluno(id)
   {
     document.getElementById("aluno").innerHTML = "";
     document.getElementById("problema").innerHTML = "";
     document.getElementById("mapa").innerHTML = "";
-    for (var i = 0; i < alunos.length; i++)
-    {
-
-      const text = alunos[i];
-
-      var t = document.createElement("h3");
-      t.style.cursor = "pointer";
-      t.addEventListener("click", (e) => {
-        e.preventDefault()
-        e.stopImmediatePropagation()
-        localStorage.setItem("studentName", text)
-        window.open("aluno.html", "_self")
-      })
-      t.innerHTML = text;
-      document.getElementById(id).appendChild(t);
-    }
-
     t = document.createElement("input");
     t.style = "font-size: 12px; display: inline-block; border: 1px solid green;";
     t.placeholder = "nome";
+    t.id = "nomein";
     document.getElementById(id).appendChild(t);
     t = document.createElement("button");
     t.style = "font-size: 12px; display: inline-block; border: 1px solid green;";
     t.innerHTML = "adicionar";
+    t.onclick = "addName()";
     document.getElementById(id).appendChild(t);
   }
 
@@ -226,7 +215,6 @@ button:hover {
     document.getElementById("mapa").innerHTML = "";
     for (var i = 0; i < mapa.length; i++)
     {
-
       var t = document.createElement("h3");
       t.innerHTML = mapa[i];
       t.style.cursor = "pointer";
@@ -298,6 +286,7 @@ button:hover {
       <hr>
       <div>
         <h2 onmouseover="buildAluno('aluno')" >Alunos</h2>
+        <div id = "nomes"></div>
         <div class="aluno" id="aluno">
       </div>
       </div>
@@ -312,7 +301,6 @@ button:hover {
         <div class="aluno" id="mapa">
       </div>
       </div>
-
 
     </div>
 
