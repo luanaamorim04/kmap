@@ -115,7 +115,6 @@ button:hover {
   width: 100%; /* Could be more or less, depending on screen size */
 
 }
-}
 
 </style>
 
@@ -125,8 +124,17 @@ button:hover {
 
   function addName()
   {
-    var t = document.getElementById("nomein").value;
-    document.getElementById("nomes").innerHTML += `<h3>` + t + `</h3>`;
+    var text = document.getElementById("nomein").value;
+    var t = document.createElement("h3");
+    t.innerHTML = text;
+    t.style.cursor = "pointer";
+    t.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      localStorage.setItem("studentName", e.target.value);
+      window.open("aluno.html", "_self")
+    });
+    document.getElementById("nomes").appendChild(t);
   }
 
   function buildAluno(id)
@@ -171,7 +179,6 @@ button:hover {
 
   function buildRate(idx)
   {
-    alert(idx);
     for (var i = 1; i <= idx; i++)
     {
       document.getElementById(i).style = "color: green";
