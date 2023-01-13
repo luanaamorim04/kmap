@@ -15,7 +15,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
   width:  100px;
 }
 
-hr 
+hr
 {
   color: green;
 }
@@ -88,7 +88,7 @@ button:hover {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0);  
+  background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity
   /*padding-top: 60px;*/
 }
@@ -102,13 +102,12 @@ button:hover {
   width: 100%; /* Could be more or less, depending on screen size */
 
 }
-}
 </style>
 
 <script type="text/javascript">
 
   const alunos = ["Teoria dos números", "Combinatória", "Álgebra", "Geometria"];
-  
+
   function build(id)
   {
     for (var i = 0; i < alunos.length; i++)
@@ -133,10 +132,10 @@ button:hover {
 <body>
 
 <div id="id01" class="modal">
-  
+
   <form class="modal-content animate" action="/action_page.php" method="post">
     <div class="container" style="height: 660px">
-      <h1>Aluno</h1>
+      <h1 id="nome_aluno"></h1>
       <hr>
       <div display="none" onmouseover="build('aluno')" onmouseout="hide('aluno')">
         <h2 >Desempenho</h2>
@@ -163,10 +162,13 @@ button:hover {
 
 
     <div class="container" style="background-color:#f1f1f1">
-        
+
     </div>
   </form>
 </div>
 
 
-  
+<script>
+  document.getElementById("nome_aluno").innerText =
+    localStorage.getItem("studentName");
+</script>
