@@ -112,8 +112,9 @@ button:hover {
 <script type="text/javascript">
 
   const alunos = ["Luana", "Ruy", "Tiago", "Nikolaz"];
+  const mapa = ["Informatica", "Matematica", "Fisica", "Historia"];
   
-  function build(id)
+  function buildAluno(id)
   {
     document.getElementById("aluno").innerHTML = "";
     document.getElementById("problema").innerHTML = "";
@@ -126,8 +127,50 @@ button:hover {
       document.getElementById(id).appendChild(t);
     }
 
+    t = document.createElement("input");
+    t.style = "font-size: 12px; display: inline-block; border: 1px solid green;";
+    t.placeholder = "nome";
+    document.getElementById(id).appendChild(t);
+    t = document.createElement("button");
+    t.style = "font-size: 12px; display: inline-block; border: 1px solid green;";
+    t.innerHTML = "adicionar";
+    document.getElementById(id).appendChild(t);
+  }
+
+  function buildMapa(id)
+  {
+    document.getElementById("aluno").innerHTML = "";
+    document.getElementById("problema").innerHTML = "";
+    document.getElementById("mapa").innerHTML = "";
+    for (var i = 0; i < mapa.length; i++)
+    {
+
+      var t = document.createElement("h3");
+      t.innerHTML = mapa[i];
+      document.getElementById(id).appendChild(t);
+    }
+  }
+
+  function buildProblema(id)
+  {
+    document.getElementById("aluno").innerHTML = "";
+    document.getElementById("problema").innerHTML = "";
+    document.getElementById("mapa").innerHTML = "";
     var t = document.createElement("input");
-    t.style = "padding: 12px 20px; display: inline-block; border: 2px solid green;";
+    t.style = "font-size: 12px; display: inline-block; border: 1px solid green;";
+    t.placeholder = "titulo";
+    document.getElementById(id).appendChild(t);
+    t = document.createElement("input");
+    t.style = "font-size: 12px; display: inline-block; border: 1px solid green;";
+    t.placeholder = "descricao";
+    document.getElementById(id).appendChild(t);
+    t = document.createElement("input");
+    t.style = "font-size: 12px; display: inline-block; border: 1px solid green;";
+    t.placeholder = "tags";
+    document.getElementById(id).appendChild(t);
+    t = document.createElement("button");
+    t.style = "font-size: 12px; display: inline-block; border: 1px solid green;";
+    t.innerHTML = "adicionar";
     document.getElementById(id).appendChild(t);
   }
 
@@ -151,19 +194,17 @@ button:hover {
       <h1>Olimpo</h1>
       <hr>
       <div display="none">
-        <h2 onmouseover="build('aluno')" >Alunos</h2>
+        <h2 onmouseover="buildAluno('aluno')" >Alunos</h2>
         <div class="aluno" id="aluno" display="none">
       </div>
       </div>
-      <div display="none" onmouseover="build('problema')">
-        <h2>Problemas</h2>
-        <div id="problems"></div>
-        <input id="title" placeholder="Título" />
-        <input id="description" placeholder="Descrição"/>
-        <button id="add">Adicionar problema</button>
+      <div display="none" onmouseover="buildProblema('problema')">
+        <h2 >Problemas</h2>
+
+        <div class="aluno" id="problema" display="none">
       </div>
       </div>
-      <div display="none" onmouseover="build('mapa')">
+      <div display="none" onmouseover="buildMapa('mapa')">
         <h2 >Mapas</h2>
         <div class="aluno" id="mapa" display="none">
       </div>
@@ -177,39 +218,6 @@ button:hover {
     </div>
   </form>
 </div>
-<script>
-  // Get the modal
-var modal = document.getElementById('id01');
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-
-if (!localStorage.getItem("problems")) {
-    localStorage.setItem("problems", JSON.stringify([]))
-  }
-
-  const problems = document.getElementById("problems")
-  JSON.parse(localStorage.getItem("problems") ?? "[]").forEach(drawProblem);
-
-  document.getElementById("add").addEventListener("click", (e) => {
-    e.preventDefault()
-    e.stopImmediatePropagation()
-    const problem = {
-      title: document.getElementById("title").value,
-      description: document.getElementById("description").value,
-    }
-    localStorage.setItem("problems", JSON.stringify([...JSON.parse(localStorage.getItem("problems")), problem]))
-    drawProblem(problem)
-
-  })
-
-  function drawProblem(problem) {
-    problems.innerHTML += `<h3>${problem.title}</h3><h4>${problem.description}</h4>`
-  }
-</script>
 </body>
 </html>
