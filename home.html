@@ -122,18 +122,26 @@ button:hover {
   const alunos = ["Luana", "Ruy", "Tiago", "Nikolaz"];
   const mapa = ["Informatica", "Matematica", "Fisica", "Historia"];
 
-  function addName()
+  function addName(text, add = true)
   {
-    var text = document.getElementById("nomein").value;
     var t = document.createElement("h3");
     t.innerHTML = text;
     t.style.cursor = "pointer";
     t.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopImmediatePropagation();
-      localStorage.setItem("studentName", e.target.value);
+      localStorage.setItem("studentName", text);
       window.open("aluno.html", "_self")
     });
+    if (add) {
+      localStorage.setItem(
+        "alunos",
+        JSON.stringify([
+          ...JSON.parse(localStorage.getItem("alunos") ?? "[]"),
+          text,
+        ]),
+      );
+    }
     document.getElementById("nomes").appendChild(t);
   }
 
@@ -153,7 +161,7 @@ button:hover {
     t.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopImmediatePropagation();
-      addName();
+      addName(document.getElementById("nomein").value);
     });
     document.getElementById(id).appendChild(t);
   }
@@ -260,6 +268,14 @@ button:hover {
     </div>
   </form>
 </div>
+
+<script>
+  let alunos_2 = JSON.parse(localStorage.getItem("alunos") ?? "[]")
+  console.log(alunos_2)
+  alunos_2.forEach((aluno) => {
+    addName(aluno, false);
+  });
+</script>
 
 </body>
 </html>
