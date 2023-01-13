@@ -150,6 +150,7 @@ button:hover {
     document.getElementById("aluno").innerHTML = "";
     document.getElementById("problema").innerHTML = "";
     document.getElementById("mapa").innerHTML = "";
+    if (id === "") return;
     t = document.createElement("input");
     t.style = "font-size: 12px; display: inline-block; border: 1px solid green;";
     t.placeholder = "nome";
@@ -253,8 +254,8 @@ button:hover {
         <div class="aluno" id="problema">
       </div>
       </div>
-      <div onmouseenter="buildMapa('mapa')">
-        <h2 >Mapas</h2>
+      <div onmouseenter="buildAluno('')">
+        <h2 >Apostilas</h2>
         <div class="aluno" id="mapa">
       </div>
       </div>
